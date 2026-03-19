@@ -569,8 +569,8 @@ class H2OAbsModel(AbsModel):
                 for j in range(0, 2):
                     if width2 > 0 and j == 0 and np.abs(df[j]) < (10 * width0):
                         # speed-dependent resonant shape factor, minus base
-                        xc = complex(
-                            (width0 - np.dot(1.5, width2)), df[j]) / width2
+                        real_part = float(width0 - 1.5 * width2)
+                        xc = complex(real_part, float(df[j])) / width2
                         if H2OAbsModel.model == 'R20SD':
                             if i == 1:
                                 delta2 = (self.h2oll.d2air * pda) + \
