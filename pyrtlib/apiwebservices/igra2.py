@@ -58,14 +58,14 @@ class IGRAUpperAir(HTTPEndPoint):
         super().__init__('https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/')
 
     @classmethod
-    def request_data(cls, time: datetime, site_id: str, beg2021: Optional[bool] = False, derived: Optional[bool] = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def request_data(cls, time: datetime, site_id: str, beg2025: Optional[bool] = False, derived: Optional[bool] = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """Retreive IGRA version 2 data files contain the full period of record.
 
         Args:
             time (datetime): The date and time of the desired observation. If list of two times is given,
                 dataframes for all dates within the two dates will be returned.
             site_id (str): 11-character IGRA2 station identifier.
-            beg2021 (Optional[bool], optional): If True retrieve files of derived sounding parameters. Defaults to False.
+            beg2025 (Optional[bool], optional): If True retrieve files of derived sounding parameters. Defaults to False.
             derived (Optional[bool], optional): If True retrieve files only contain soundings from the current
                 (or current and previous) year. Defaults to False.
 
@@ -98,9 +98,9 @@ class IGRAUpperAir(HTTPEndPoint):
         igra2 = cls()
 
         # Set parameters for data query
-        if beg2021:
+        if beg2025:
             igra2.folder = 'data-y2d/'
-            igra2.suffix = igra2.suffix + '-data-beg2021.txt'
+            igra2.suffix = igra2.suffix + '-data-beg2025.txt'
         else:
             igra2.folder = 'data-por/'
             igra2.suffix = igra2.suffix + '-data.txt'
