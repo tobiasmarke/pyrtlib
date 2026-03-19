@@ -762,6 +762,9 @@ def atmospheric_tickness(p: np.ndarray, t: np.ndarray, mr: Optional[np.ndarray] 
         This function is based on metpy.calc.thickness_hydrostatic method.
     """
 
+    # sort by decreasing pressure
+    assert np.all(np.diff(p) < 0), "Pressure profile must be in decreasing order"
+
     h = np.zeros(p.shape)
     for i in range(p.shape[0]):
         if i == 0:
