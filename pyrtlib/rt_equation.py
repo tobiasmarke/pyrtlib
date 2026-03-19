@@ -549,10 +549,10 @@ class RTEquation:
             pdrykpa = p[i] / 10.0 - ekpa
             # add H2O term
             npp, ncpp = H2OAbsModel().h2o_absorption(pdrykpa, v, ekpa, frq, amu)
-            awet[i] = factor * (npp + ncpp) * db2np
+            awet[i] = factor * np.squeeze(npp + ncpp) * db2np
             # add O2 term
             npp, ncpp = O2AbsModel().o2_absorption(pdrykpa, v, ekpa, frq, amu)
-            aO2[i] = factor * (npp + ncpp) * db2np
+            aO2[i] = factor * np.squeeze(npp + ncpp) * db2np
             # add N2 term
             if N2AbsModel.model:
                 aN2[i] = N2AbsModel.n2_absorption(
