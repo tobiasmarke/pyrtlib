@@ -75,7 +75,7 @@ class ERA5Reanalysis:
         # idx_lon = ERAFIVE.find_nearest(lons, lonlat[0])
         idx, _ = ERAFIVE._find_nearest(lons, lats, lonlat)
 
-        pres = np.asarray(nc.variables['level'][:])
+        pres = np.asarray(nc.variables['pressure_level'][:])
         temp = np.asarray(nc.variables['t'][:, :, idx, idx])
         # RH in decimal
         rh = np.asarray(nc.variables['r'][:, :, idx, idx]) / 100
