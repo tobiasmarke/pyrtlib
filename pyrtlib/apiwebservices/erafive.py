@@ -75,7 +75,7 @@ class ERA5Reanalysis:
         # idx_lon = ERAFIVE.find_nearest(lons, lonlat[0])
         idx, _ = ERAFIVE._find_nearest(lons, lats, lonlat)
 
-        pres = np.asarray(nc.variables['level'][:])
+        pres = np.asarray(nc.variables['pressure_level'][:])
         temp = np.asarray(nc.variables['t'][:, :, idx, idx])
         # RH in decimal
         rh = np.asarray(nc.variables['r'][:, :, idx, idx]) / 100
@@ -86,22 +86,21 @@ class ERA5Reanalysis:
         ozone = np.asarray(nc.variables['o3'][:, :, idx, idx])
         q = np.asarray(nc.variables['q'][:, :, idx, idx])
 
-        z = atmospheric_tickness(np.flip(pres), np.flip(
-            temp[0]), np.flip(q[0]))  # Altitude in km
+        z = atmospheric_tickness(pres, temp[0], q[0])  # Altitude in km
 
         date = pd.to_datetime(
-            nc.variables['time'][:], origin='1900-01-01 00:00:00.0', unit='h')
+            nc.variables['valid_time'][:], origin='1970-01-01 00:00:00.0', unit='s')
 
-        df = pd.DataFrame({'p': np.flip(pres),
+        df = pd.DataFrame({'p': pres,
                            'z': z,
-                           't': np.flip(temp[0]),
-                           'rh': np.flip(rh[0]),
-                           'clwc': np.flip(clwc[0]),
-                           'ciwc': np.flip(ciwc[0]),
-                           'crwc': np.flip(crwc[0]),
-                           'cswc': np.flip(cswc[0]),
-                           'o3': np.flip(ozone[0]),
-                           'q': np.flip(q[0]),
+                           't': temp[0],
+                           'rh': rh[0],
+                           'clwc': clwc[0],
+                           'ciwc': ciwc[0],
+                           'crwc': crwc[0],
+                           'cswc': cswc[0],
+                           'o3': ozone[0],
+                           'q': q[0],
                            'time': np.repeat(date, len(pres))
                            })
         df.attrs['units'] = {'p': 'hPa',

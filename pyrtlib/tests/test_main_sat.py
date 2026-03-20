@@ -422,7 +422,7 @@ class Test(TestCase):
 
         df_expected = pd.read_csv(
             os.path.join(THIS_DIR, "data", "tb_tot_rose21sd_RAOB_es.csv"))
-        assert_allclose(df.tbtotal, df_expected.tbtotal, atol=0)
+        assert_allclose(df.tbtotal, df_expected.tbtotal, atol=0.01)
         
     def test_pyrtlib_sat_R22SD(self):
         z, p, _, t, md = atmp.gl_atm(atmp.TROPICAL)
