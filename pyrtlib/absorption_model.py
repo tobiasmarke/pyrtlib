@@ -580,8 +580,8 @@ class H2OAbsModel(AbsModel):
                             xc = complex((width0 - np.dot(1.5, width2)), df[j] + np.dot(1.5, delta2)) / complex(
                                 width2, -delta2)
                         elif H2OAbsModel.model in ["R21SD", 'R22SD', 'R23SD', 'R24', 'MWL24']:
-                            xc = complex(
-                                (width0 - 1.5 * width2), df[j] + 1.5 * delta2) / complex(width2, -delta2)
+                            real_part = float(width0 - 1.5 * width2)
+                            xc = complex(real_part, float(df[j].item()) + 1.5 * delta2) / complex(width2, -delta2)
 
                         xrt = np.sqrt(xc)
                         pxw = 1.77245385090551603 * xrt * \
