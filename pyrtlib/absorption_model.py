@@ -524,7 +524,7 @@ class H2OAbsModel(AbsModel):
         nlines = len(self.h2oll.fl)
 
         ti = self.h2oll.reftline / t
-        df = np.zeros((2, 1))
+        df = np.zeros(2)
 
         if H2OAbsModel.model.startswith(('R19SD', 'R20SD', 'R21SD', 'R22SD', 'R23SD', 'R24', 'MWL24')):
             tiln = np.log(ti)
@@ -539,7 +539,7 @@ class H2OAbsModel(AbsModel):
                     npp_cs = con
                 else:
 
-                    npp_cs = self.h2o_continuum(frq, vx, 1)
+                    npp_cs = self.h2o_continuum(frq, vx, 1)[0]
             for i in range(0, nlines):
                 width0 = self.h2oll.w0[i] * pda * ti ** self.h2oll.x[i] + \
                     self.h2oll.w0s[i] * pvap * ti ** self.h2oll.xs[i]
