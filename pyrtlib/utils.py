@@ -736,7 +736,7 @@ def _thickness_hydrostatic(p: np.ndarray, t: np.ndarray, mr: Optional[np.ndarray
         layer_virttemp = virtual_temperature(t, mr)
 
     return (
-        -Rd / g * np.trapz(layer_virttemp, np.log(layer_p))
+        -Rd / g * np.trapezoid(layer_virttemp, np.log(layer_p))
     )
 
 
@@ -761,6 +761,9 @@ def atmospheric_tickness(p: np.ndarray, t: np.ndarray, mr: Optional[np.ndarray] 
     .. note::
         This function is based on metpy.calc.thickness_hydrostatic method.
     """
+
+    # sort by decreasing pressure
+    assert np.all(np.diff(p) < 0), "Pressure profile must be in decreasing order"
 
     h = np.zeros(p.shape)
     for i in range(p.shape[0]):

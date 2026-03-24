@@ -99,7 +99,7 @@ class TbCloudRTE(object):
 
         # convert height profile to (km above antenna height)
         self.z0 = self.z[0]
-        self.z -= self.z0
+        self.z = self.z - self.z0  # copy of z is modified to be relative to antenna height
 
         # Allocation
         self.sptaudry = np.zeros((self.nf, self.nang))
