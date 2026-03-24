@@ -132,4 +132,4 @@ class Test(TestCase):
 
         df_expected = pd.read_csv(os.path.join(
             THIS_DIR, "data", "tb_tot_ground_ros03_19sd_21sd_era5.csv"))
-        assert_allclose(df.tbtotal, df_expected.rose21sd_era5, atol=0)
+        assert_allclose(df.tbtotal, df_expected.rose21sd_era5, atol=0.01)

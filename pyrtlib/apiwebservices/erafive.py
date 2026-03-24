@@ -89,7 +89,7 @@ class ERA5Reanalysis:
         z = atmospheric_tickness(pres, temp[0], q[0])  # Altitude in km
 
         date = pd.to_datetime(
-            nc.variables['valid_time'][:], origin='1900-01-01 00:00:00.0', unit='h')
+            nc.variables['valid_time'][:], origin='1970-01-01 00:00:00.0', unit='s')
 
         df = pd.DataFrame({'p': pres,
                            'z': z,
