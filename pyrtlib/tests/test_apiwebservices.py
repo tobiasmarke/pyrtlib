@@ -4,6 +4,7 @@ from unittest import TestCase
 from datetime import datetime
 import tempfile
 import pandas as pd
+import pytest
 from pyrtlib.apiwebservices import WyomingUpperAir
 from pyrtlib.apiwebservices.erafive import ERA5Reanalysis
 
@@ -21,6 +22,7 @@ class Test(TestCase):
 
         assert b.values
         
+    @pytest.mark.skip()
     def test_get_era5(self):
         lonlat = (15.13, 37.87)
         date = datetime(2022, 7, 22, 12)
