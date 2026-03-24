@@ -735,7 +735,7 @@ def _thickness_hydrostatic(p: np.ndarray, t: np.ndarray, mr: Optional[np.ndarray
         layer_p = p
         layer_virttemp = virtual_temperature(t, mr)
 
-    trapz = getattr(np, "trapezoid", np.trapz)
+    trapz = getattr(np, "trapezoid", getattr(np, "trapz", None))
 
     return (
         -Rd / g * trapz(layer_virttemp, np.log(layer_p))
